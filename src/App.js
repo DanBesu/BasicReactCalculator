@@ -1,13 +1,14 @@
 import React from 'react'
+import Keyboard from './components/Keyboard'
+import Screen from './components/Screen'
 
 function App() {
   return (
     
-    <div className='tc'>
+    <div>
       <h1 className='f1'> Here we have a Calculator </h1>
-      
-
-
+      <Screen/>
+      <Keyboard/>
     </div>
     
     // here come the components
