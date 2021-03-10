@@ -5,9 +5,9 @@ const Keyboard = () => {
     return (
         <div>
             <div className='row'>
+                <Button text="del"/>
                 <Button text="1/x"/>
                 <Button text="x^2"/>
-                <Button text="del"/>
                 <Button text="/"/>
             </div>
 
