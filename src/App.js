@@ -12,7 +12,6 @@ function App() {
     </div>
     
     // here come the components
-
   );
 }
 

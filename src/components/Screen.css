@@ -1,0 +1,8 @@
+.rectangle{
+    display: inline-block;
+    width: 100px;
+    height: 25px;
+    background: white;
+    outline-style: solid;
+    font-size: small;
+}

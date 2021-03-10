@@ -1,13 +1,12 @@
 import React from 'react';
+import './Screen.css'
 
 const Screen = ({textChange}) => {
-
     return(
-        <div>
-            <input input={textChange}/>
+        <div className="rectangle">
+            {textChange}
         </div>
     );
-
 }
 
 export default Screen;
