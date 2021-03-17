@@ -8,80 +8,79 @@ function App() {
   const [operand1, setOperand1] = useState(0); 
   const [operand2, setOperand2] = useState(null);
   const [screenText, setScreenText] = useState('0');
-  const [operation, setOperation] = useState('');
-  const [status, setStatus] = useState(1); // 1 - equal(end of operation, work with operand1), 2 - operation open (work with operand2) 
-  // let status = 1;  
+  const [operation, setOperation] = useState('=');
 
   useEffect( ()=> {
-    if(status === 1){
+    if(operation === '='){
       setScreenText(`${operand1}`);
     }
-  }, [operand1, status])
+  }, [operand1, operation])
 
   useEffect( ()=> {
-    if(status === 2 && operand2 !== null){
+    if(operation !== '=' && operand2 !== null){
       setScreenText(`${operand2}`);
     }
-  }, [operand2])
+  }, [operand2, operation])
 
   useEffect( ()=> {
-    setScreenText(`${operation}`);
+    if(operation !== '=')
+      setScreenText(`${operation}`);
   }, [operation])
 
   const displayNewDigit = (newDigit) => {
-    if(status === 1){
+    if(operation === '='){
       setOperand1(operand1 * 10 + newDigit)
     }
-    if(status === 2){
-      if(operand2 === null)
-        setOperand2(newDigit)
-      else
-        setOperand2(operand2 * 10 + newDigit)
+    if(operation !== '='){      
+      setOperand2((operand2 || 0) * 10 + newDigit) 
     }
   }
 
   const equals = () => {
-    if(operation === '+'){
-      setStatus(1)
-      setOperand1(operand1 + operand2)
-      setOperand2(null)
+    switch (operation){
+      case '+':{
+        setOperand1(operand1 + operand2)
+        setOperand2(null)
+        break;
+      }
+      case '-':{
+        setOperand1(operand1 - operand2)
+        setOperand2(null)
+        break;
+      }
+      case '*':{
+        if(operand2 !== null)
+          setOperand1(operand1 * operand2)
+        setOperand2(null)
+        break;
+      }
+      case '/':{
+        if(operand2 !== null)
+          setOperand1(Math.floor(operand1 / operand2))
+        setOperand2(null)
+        break;
+      }
+      default:
+        break;
+        
     }
-    else if(operation === '-'){
-      setStatus(1)
-      setOperand1(operand1 - operand2)
-      setOperand2(null)
-    }
-    else if(operation === '*'){
-      setStatus(1)
-      if(operand2 !== null)
-        setOperand1(operand1 * operand2)
-      setOperand2(null)
-    }
-    else if(operation === '/'){
-      setStatus(1)
-      if(operand2 !== null)
-        setOperand1(Math.floor(operand1 / operand2))
-      setOperand2(null)
-    }
+    setOperation('=')
   }
 
   const add = () => {
     setOperation('+');
-    setStatus(2);
     setOperand1(operand1 + operand2);
     setOperand2(null);
   }
 
   const subtract = () => {
     setOperation('-');
-    setStatus(2);
     setOperand1(operand1 - operand2);
     setOperand2(null);
   }
 
   const multiply = () => {
     setOperation('*');
-    setStatus(2);
     if(operand2 !== null)
       setOperand1(operand1 * operand2);
     setOperand2(null);
@@ -89,19 +88,22 @@ function App() {
 
   const divide = () => {
     setOperation('/');
-    setStatus(2);
     if(operand2 !== null)
       setOperand1(operand1 / operand2);
     setOperand2(null);
   }
 
-  const reverseSign = () => status === 1 ? setOperand1(operand1 * -1) : setOperand2(operand2 * -1)
+  const reverseSign = () => operation === '=' ? setOperand1(operand1 * -1) : setOperand2(operand2 * -1)
 
-  const reset = () => {setOperand2(null); setOperand1(0); setOperation('')}
+  const reset = () => {
+    setOperand2(null); 
+    setOperand1(0); 
+    setOperation('')
+  }
 
-  const del = () => status === 1 ? setOperand1((operand1 - operand1 % 10)/10) : setOperand2((operand2 - operand2 % 10)/10)
+  const del = () => operation === '=' ? setOperand1(Math.floor(operand1/10)) : setOperand2(Math.floor(operand2/10))
 
-  const powerTwo = () => status === 1 ? setOperand1(operand1 ** 2) : setOperand2(operand2 ** 2)
+  const powerTwo = () => operation === '=' ? setOperand1(operand1 ** 2) : setOperand2(operand2 ** 2)
 
   return (
     

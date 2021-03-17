@@ -7,8 +7,8 @@ const Keyboard = ({displayNewDigit, del, reverseSign, reset, equals, powerTwo, a
             <div className='row'>
                 <Button text="del" onClick={del}/>
                 <Button text="C" onClick={reset}/>
-                <Button text="x^2" onClick={() => powerTwo()}/>
-                <Button text="/" onClick={()=>divide()}/>
+                <Button text="x^2" onClick={powerTwo}/>
+                <Button text="/" onClick={divide}/>
             </div>
 
             <div className='row'>
@@ -25,13 +25,13 @@ const Keyboard = ({displayNewDigit, del, reverseSign, reset, equals, powerTwo, a
                 <Button text="1" onClick={()=>displayNewDigit(1)}/>
                 <Button text="2" onClick={()=>displayNewDigit(2)}/>
                 <Button text="3" onClick={()=>displayNewDigit(3)}/>
-                <Button text="+" onClick={()=>add()}/>
+                <Button text="+" onClick={add}/>
             </div>
 
             <div className='row'>
-                <Button text="+/-" onClick={()=>reverseSign()}/>
-                <Button text="0" onClick={()=>displayNewDigit(0)}/>
-                <Button text="=" onClick={()=>equals()}/>
+                <Button text="+/-" onClick={reverseSign}/>
+                <Button text="0" onClick={displayNewDigit}/>
+                <Button text="=" onClick={equals}/>
             </div>            
         </div>
     );
