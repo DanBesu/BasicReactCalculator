@@ -1,10 +1,10 @@
 import React from 'react';
 import './Screen.css'
 
-const Screen = ({textChange}) => {
+const Screen = ({text}) => {
     return(
         <div className="rectangle">
-            {textChange}
+            {text}
         </div>
     );
 }
