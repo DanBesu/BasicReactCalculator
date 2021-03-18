@@ -40,30 +40,26 @@ function App() {
     switch (operation){
       case '+':{
         setOperand1(operand1 + operand2)
-        setOperand2(null)
         break;
       }
       case '-':{
         setOperand1(operand1 - operand2)
-        setOperand2(null)
         break;
       }
       case '*':{
         if(operand2 !== null)
           setOperand1(operand1 * operand2)
-        setOperand2(null)
         break;
       }
       case '/':{
         if(operand2 !== null)
           setOperand1(Math.floor(operand1 / operand2))
-        setOperand2(null)
         break;
       }
       default:
         break;
-        
     }
+    setOperand2(null)
     setOperation('=')
   }
 
